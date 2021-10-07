@@ -15,7 +15,9 @@ class ChebRoots:
         self._equality_checker = EqualityChecker()
         self._strict_equality_checker = EqualityChecker(0, 0)
 
-    def find_all_roots(self, interval: list[float]) -> Tuple[list[float], Optional[list[float]]]:
+    def find_all_roots(
+        self, interval: list[float]
+    ) -> Tuple[list[float], Optional[list[float]]]:
         """Find all roots in the given interval.
         The output is a tuple of:
           - the roots x0 where F(x0) := 0, and

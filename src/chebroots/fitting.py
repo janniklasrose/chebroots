@@ -7,6 +7,7 @@ from chebpy.core.settings import userPrefs as ChebpyPrefs
 
 class Chebyshev:
     """Fitting a function using Chebyshev polynomials."""
+
     warn: bool = True
     n_fallback: int = 1000
 
@@ -33,11 +34,13 @@ def converged_chebfun(fn, a: float, b: float) -> Chebfun:
     if not is_converged(cheb):
         n = Chebyshev.n_fallback
         if Chebyshev.warn:
-            warnings.warn((
-                f'Interpolation with chebfun in the interval [{a:g}, {b:g}]'
-                f' failed to converge when using the automatic constructor.'
-                f' Approximating using a fixed number of points ({n:d}).'
-            ))
+            warnings.warn(
+                (
+                    f"Interpolation with chebfun in the interval [{a:g}, {b:g}]"
+                    f" failed to converge when using the automatic constructor."
+                    f" Approximating using a fixed number of points ({n:d})."
+                )
+            )
         cheb = chebfun(fn, [a, b], n=n)  # hopefully this is accurate enough
     return cheb
 
@@ -45,5 +48,5 @@ def converged_chebfun(fn, a: float, b: float) -> Chebfun:
 def is_converged(cheb: Chebfun) -> bool:
     """Check if a Chebyshev approximation is converged."""
     maxpow2 = ChebpyPrefs.maxpow2
-    max_n = 2**(maxpow2-1)  # one exponent less to be safe
+    max_n = 2 ** (maxpow2 - 1)  # one exponent less to be safe
     return all([f.size < max_n for f in cheb.funs])

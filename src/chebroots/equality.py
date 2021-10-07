@@ -9,8 +9,8 @@ class BaseEqualityChecker(ABC):
         """Set the absolute and relative tolerances of the checker.
         Exact equality is achieved with abstol=reltol=0.
         """
-        self.abstol : float = abstol
-        self.reltol : float = reltol
+        self.abstol: float = abstol
+        self.reltol: float = reltol
 
     def __call__(self, a: float, b: float) -> bool:
         """Check if two values are equal."""
@@ -23,5 +23,6 @@ class BaseEqualityChecker(ABC):
 
 class EqualityChecker(BaseEqualityChecker):
     """Check for equality using the built-in math module."""
+
     def _isclose(self, a: float, b: float) -> bool:
         return math.isclose(a, b, abs_tol=self.abstol, rel_tol=self.reltol)
