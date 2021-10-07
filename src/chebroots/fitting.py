@@ -1,6 +1,5 @@
 import warnings
 
-import numpy as np
 from chebpy import chebfun
 from chebpy.core.chebfun import Chebfun
 from chebpy.core.settings import userPrefs as ChebpyPrefs
@@ -15,14 +14,16 @@ class Chebyshev:
         self.fn = fn
 
     def find_extrema(self, a: float, b: float) -> list[float]:
-        """Find the extrema of the function in the given interval."""
+        """Find the extrema of the function in the given interval.
+        Returns a sorted list of extrema clipped to [a, b].
+        """
         cheb = converged_chebfun(self.fn, a, b)
         dcheb = cheb.diff()
-        extrema: np.ndarray = dcheb.roots()
-        # In case the results are not already sorted
-        extrema = np.sort(extrema)
-        # Numerical error may put extrema just outside the interval
-        extrema = np.clip(extrema, a, b)
+        extrema = dcheb.roots()  # type: numpy.ndarray
+        # Post-process the resulting roots
+        # - sort: chebpy makes no explicit guarantees about the order of roots
+        # - clip: numerical error may place roots just outside the interval
+        extrema.sort().clip(a, b)
         return extrema.tolist()
 
 
