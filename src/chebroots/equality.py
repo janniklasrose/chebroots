@@ -1,14 +1,14 @@
 from abc import ABC, abstractmethod
 import math
 
-import numpy
 
-
-class EqualityChecker(ABC):
+class BaseEqualityChecker(ABC):
     """Abstract base class for an equality checker."""
 
     def __init__(self, abstol: float = 1e-16, reltol: float = 0):
-        """Configure the absolute and relative tolerances"""
+        """Set the absolute and relative tolerances of the checker.
+        Exact equality is achieved with abstol=reltol=0.
+        """
         self.abstol : float = abstol
         self.reltol : float = reltol
 
@@ -21,16 +21,7 @@ class EqualityChecker(ABC):
         raise NotImplementedError
 
 
-class EqualityCheckerMath(EqualityChecker):
+class EqualityChecker(BaseEqualityChecker):
+    """Check for equality using the built-in math module."""
     def _isclose(self, a: float, b: float) -> bool:
         return math.isclose(a, b, abs_tol=self.abstol, rel_tol=self.reltol)
-
-
-class EqualityCheckerNumpy(EqualityChecker):
-    def _isclose(self, a: float, b: float) -> bool:
-        return numpy.isclose(a, b, atol=self.abstol, rtol=self.reltol)
-
-
-class StrictEqualityChecker(EqualityCheckerMath):
-    def __init__(self):
-        super().__init__(abstol=0, reltol=0)

@@ -2,7 +2,7 @@ from typing import Callable, Optional, Tuple
 
 from .fitting import Chebyshev
 from .rootfinding import SingleRoot
-from .equality import EqualityCheckerMath, StrictEqualityChecker
+from .equality import EqualityChecker
 
 
 class ChebRoots:
@@ -12,8 +12,8 @@ class ChebRoots:
         self.fn = fn
         self.cheb = Chebyshev(fn)
         self._singleroot = SingleRoot()
-        self._equality_checker = EqualityCheckerMath()
-        self._strict_equality_checker = StrictEqualityChecker()
+        self._equality_checker = EqualityChecker()
+        self._strict_equality_checker = EqualityChecker(0, 0)
 
     def find_all_roots(self, interval: list[float]) -> Tuple[list[float], Optional[list[float]]]:
         """Find all roots in the given interval.
