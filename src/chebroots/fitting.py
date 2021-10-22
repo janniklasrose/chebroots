@@ -21,12 +21,13 @@ class Chebyshev:
         """
         cheb = converged_chebfun(self.fn, a, b)
         dcheb = cheb.diff()
-        extrema = dcheb.roots()  # type: numpy.ndarray
+        extrema: List[float] = dcheb.roots().tolist()  # chebpy uses numpy.ndarray
         # Post-process the resulting roots
         # - sort: chebpy makes no explicit guarantees about the order of roots
+        extrema.sort()
         # - clip: numerical error may place roots just outside the interval
-        extrema.sort().clip(a, b)
-        return extrema.tolist()
+        extrema = clip(extrema, a, b)
+        return extrema
 
 
 def converged_chebfun(fn, a: float, b: float) -> Chebfun:
@@ -51,3 +52,9 @@ def is_converged(cheb: Chebfun) -> bool:
     maxpow2 = ChebpyPrefs.maxpow2
     max_n = 2 ** (maxpow2 - 1)  # one exponent less to be safe
     return all([f.size < max_n for f in cheb.funs])
+
+
+def clip(arr: List[float], lower: float, upper: float) -> List[float]:
+    def _clip(x: float) -> float:
+        return lower if x < lower else upper if x > upper else x
+    return list(map(_clip, arr))
