@@ -1,3 +1,4 @@
+from typing import List
 import warnings
 
 from chebpy import chebfun
@@ -14,7 +15,7 @@ class Chebyshev:
     def __init__(self, fn) -> None:
         self.fn = fn
 
-    def find_extrema(self, a: float, b: float) -> list[float]:
+    def find_extrema(self, a: float, b: float) -> List[float]:
         """Find the extrema of the function in the given interval.
         Returns a sorted list of extrema clipped to [a, b].
         """

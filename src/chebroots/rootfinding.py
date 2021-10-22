@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, List
 import warnings
 
 from scipy.optimize import brentq
@@ -14,7 +14,7 @@ class SingleRoot:
 
     def find_root(
         self, fn: Callable[[float], float], a: float, b: float
-    ) -> list[float]:
+    ) -> List[float]:
         """Find the root(s) of a function in the given interval.
         This assumes the function has one root in the open inverval (a, b).
         If one or more of the endpoints are zeros, they are returned only.

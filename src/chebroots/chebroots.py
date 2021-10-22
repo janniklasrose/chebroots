@@ -1,4 +1,4 @@
-from typing import Callable, Optional, Tuple
+from typing import Callable, List, Optional, Tuple
 
 from .fitting import Chebyshev
 from .rootfinding import SingleRoot
@@ -16,8 +16,8 @@ class ChebRoots:
         self._strict_equality_checker = EqualityChecker(0, 0)
 
     def find_all_roots(
-        self, interval: list[float]
-    ) -> Tuple[list[float], Optional[list[float]]]:
+        self, interval: List[float]
+    ) -> Tuple[List[float], Optional[List[float]]]:
         """Find all roots in the given interval.
         The output is a tuple of:
           - the roots x0 where F(x0) := 0, and
@@ -43,7 +43,7 @@ class ChebRoots:
             error = None
         return x0, error
 
-    def _subdivide(self, breakpoints: list[float]) -> list[Tuple[float, float]]:
+    def _subdivide(self, breakpoints: List[float]) -> List[Tuple[float, float]]:
         """Recursively split fn at the breakpoints into intervals with at most one root."""
         new_breakpoints: list[Tuple[float, float]] = []
         for x_L, x_R in zip(breakpoints[:-1], breakpoints[1:]):
@@ -55,7 +55,7 @@ class ChebRoots:
             new_breakpoints.extend(breakpoints_i)
         return new_breakpoints
 
-    def find_local_extrema(self, x_L: float, x_R: float) -> list[float]:
+    def find_local_extrema(self, x_L: float, x_R: float) -> List[float]:
         """Find local extrema, including endpoints."""
 
         # Check that the interval is not degenerate
