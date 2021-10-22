@@ -10,3 +10,7 @@ dependencies:
   # additional modules for convenience
   - numpy
   - matplotlib
+  # pip
+  - pip
+  - pip:
+    - .
