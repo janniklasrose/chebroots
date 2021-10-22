@@ -1,4 +1,4 @@
-name: binder-environment
+name: chebroots-binder
 channels:
   - conda-forge
 dependencies:
@@ -10,3 +10,7 @@ dependencies:
   # additional modules for convenience
   - numpy
   - matplotlib
+  # pip
+  - pip
+  - pip:
+    - ..
