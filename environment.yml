@@ -1,0 +1,12 @@
+name: binder-environment
+channels:
+  - conda-forge
+dependencies:
+  # we require Python 3.8 or higher
+  - python=3.8
+  # core dependencies
+  - scipy
+  - chebfun
+  # additional modules for convenience
+  - numpy
+  - matplotlib
