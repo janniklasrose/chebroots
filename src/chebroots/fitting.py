@@ -57,4 +57,5 @@ def is_converged(cheb: Chebfun) -> bool:
 def clip(arr: List[float], lower: float, upper: float) -> List[float]:
     def _clip(x: float) -> float:
         return lower if x < lower else upper if x > upper else x
+
     return list(map(_clip, arr))
