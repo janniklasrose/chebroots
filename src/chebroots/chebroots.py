@@ -38,7 +38,7 @@ class ChebRoots:
         # Post-process
         x0 = sorted(set(roots_all))  # ensure roots are sorted and unique
         if len(x0) > 0:
-            error = self.fn(x0)  # this is the error since F(x0) := 0
+            error = [self.fn(x) for x in x0]  # this is the error since F(x0) := 0
         else:
             error = None
         return x0, error
