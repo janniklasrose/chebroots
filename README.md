@@ -45,4 +45,4 @@ conda env export --name chebroots-dev --from-history | grep --invert-match '^pre
 black src/ 
 ```
 
-[launch-binder]: https://mybinder.org/v2/gh/janniklasrose/chebroots/HEAD
+[launch-binder]: https://mybinder.org/v2/gh/janniklasrose/chebroots/HEAD?labpath=docs%2Fdemo.ipynb
