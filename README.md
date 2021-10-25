@@ -1,20 +1,20 @@
 # chebroots
 
-Recursively finding all roots of continuous functions using Chebyshev polynomials
+Recursively finding **all** roots of continuous functions using Chebyshev polynomials.
 
 ## Demonstration
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/janniklasrose/chebroots/HEAD)
+[![Binder](https://mybinder.org/badge_logo.svg)][launch-binder]
 
+To use `chebroots`, first construct a `ChebRoots` object by providing it with the function whose roots should be found. Then, the `find_all_roots` method returns all roots in the specified interval as well as the numerical error at every root.
 ```python
-import math
 from chebroots import ChebRoots
 fun = lambda x: x**2 - 1
-roots_true = [-1, +1]
-roots_cheb, _ = ChebRoots(fun).find_all_roots([-2, +2])
-for r_t, r_c in zip(roots_true, roots_cheb):
-    assert math.isclose(r_t, r_c)
+interval = [-2, +2]
+roots, error = ChebRoots(fun).find_all_roots(interval)
 ```
+
+The [Jupyter](https://jupyter.org) Notebooks (`.ipynb`) in the [docs](./docs/) directory provide more detailed examples, including how to set user-defined tolerances. They can be viewed directly, for example on GitHub, or opened and used interactively with [Binder](https://mybinder.org). To launch the latest version, click [here][launch-binder] or on the "launch binder" badge above.
 
 ## Development environment
 
@@ -44,3 +44,5 @@ conda env export --name chebroots-dev --from-history | grep --invert-match '^pre
 ```shell
 black src/ 
 ```
+
+[launch-binder]: https://mybinder.org/v2/gh/janniklasrose/chebroots/HEAD
