@@ -1,0 +1,14 @@
+name: chebroots-dev
+channels:
+  - conda-forge
+dependencies:
+  - scipy
+  - chebfun
+  - matplotlib
+  - python=3.8
+  - numpy
+  - black
+  - jupyter
+  - pip
+  - pip:
+    - -e .
